@@ -27,7 +27,7 @@
   "license": "MIT",
   "datoCmsPlugin": {
     "title": "BigCommerce product",
-    "previewImage": "docs/preview.gif",
+    "previewImage": "docs/preview.png",
     "coverImage": "docs/cover.jpg",
     "entryPoint": "dist/index.html",
     "pluginType": "field_editor",
