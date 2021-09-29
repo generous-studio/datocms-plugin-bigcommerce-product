@@ -1,6 +1,6 @@
 {
   "name": "datocms-plugin-bigcommerce-product",
-  "homepage": "https://github.com/YOUR-USER/datocms-plugin-bigcommerce-product",
+  "homepage": "https://github.com/generous-studio/datocms-plugin-bigcommerce-product",
   "version": "0.0.1",
   "description": "A plugin that allows users to search and select BigCommerce products.",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "dist": "NODE_ENV=production webpack --progress",
     "addToProject": "yo datocms-plugin:add-to-project",
     "prepublishOnly": "rimraf lib dist && mkdir dist && npm run dist",
-    "lint": "eslint \"./src/*.{js,jsx}\"",
+    "lint": "eslint \"./src/*.{js,jsx,ts,tsx}\"",
     "test": "echo 1"
   },
   "keywords": [
