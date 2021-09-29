@@ -4,9 +4,13 @@ import { ProductsGrid } from "./ProductsGrid";
 import { usePlugin } from "../context/PluginContext";
 import { Product } from "../types/Product";
 
-const SearchBar: React.FC<{ onValue: (term: string) => void }> = ({
-  onValue,
-}) => {
+//@ts-ignore
+import icon from "../styles/search.svg";
+
+const SearchBar: React.FC<{
+  onValue: (term: string) => void;
+  loading: boolean;
+}> = ({ onValue, loading }) => {
   const [value, _setValue] = useState<string>();
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => _setValue(ev.target.value),
@@ -21,13 +25,15 @@ const SearchBar: React.FC<{ onValue: (term: string) => void }> = ({
 
   return (
     <div className={"search-bar__container"}>
+      <img src={icon} className={"search-bar__icon"} />
       <input
         type={"text"}
         className={"search-bar__input"}
-        placeholder={"Search for products by name"}
+        placeholder={"Search products..."}
         onChange={onChange}
         value={value}
       />
+      <i className={`search-bar__spinner ${loading ? "visible" : ""}`} />
     </div>
   );
 };
@@ -42,10 +48,10 @@ export const Search: React.FC = () => {
   );
   return (
     <>
-      <SearchBar onValue={setSearchValue} />
+      <SearchBar onValue={setSearchValue} loading={loading} />
       <ProductsGrid products={products} onProductClick={onProductClick} />
-      {loading && <div className={"search-state"}>Loading</div>}
-      {!loading && (!products || products.length === 0) && (
+      {loading && <div className={"search-state"}>Loading...</div>}
+      {!loading && searchValue && (!products || products.length === 0) && (
         <div className={"search-state"}>No products found.</div>
       )}
     </>
