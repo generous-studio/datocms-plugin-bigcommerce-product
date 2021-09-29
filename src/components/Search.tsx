@@ -44,6 +44,10 @@ export const Search: React.FC = () => {
     <>
       <SearchBar onValue={setSearchValue} />
       <ProductsGrid products={products} onProductClick={onProductClick} />
+      {loading && <div className={"search-state"}>Loading</div>}
+      {!loading && (!products || products.length === 0) && (
+        <div className={"search-state"}>No products found.</div>
+      )}
     </>
   );
 };

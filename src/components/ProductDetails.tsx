@@ -32,6 +32,11 @@ export const ProductDetails: React.FC<{ productId: string }> = ({
           </button>
         </>
       )}
+
+      {loading && <div className={"search-state"}>Loading</div>}
+      {!loading && !product && (
+        <div className={"search-state"}>Product not found</div>
+      )}
     </div>
   );
 };

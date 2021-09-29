@@ -9,3 +9,10 @@
 .search-bar__input {
     flex: 1;
 }
+
+
+.search-state {
+    text-align: center;
+    padding: 40px 0 10px 0;
+    width: 100%;
+}

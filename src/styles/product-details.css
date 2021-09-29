@@ -6,6 +6,10 @@
     grid-column-gap: 10px;
 }
 
+.product-details-container .search-state {
+    grid-column: 1 / 6;
+}
+
 .product-details-image {
     grid-column: 1;
     grid-row: 1 / 5;
