@@ -1,5 +1,5 @@
 {
-  "name": "datocms-plugin-bigcommerce-product",
+  "name": "@generous-studio/datocms-plugin-bigcommerce-product",
   "homepage": "https://github.com/generous-studio/datocms-plugin-bigcommerce-product",
   "version": "0.0.1",
   "description": "A plugin that allows users to search and select BigCommerce products.",
