@@ -13,7 +13,7 @@ export const ProductDetails: React.FC<{ productId: string }> = ({
         <>
           <img
             className={"product-details-image"}
-            src={product.defaultImage.urlOriginal}
+            src={product.defaultImage?.urlOriginal}
           />
           <h1 className={"product-details-title"}>{product.name}</h1>
           <div className={"product-details-description"}>
