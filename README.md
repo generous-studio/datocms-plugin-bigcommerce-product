@@ -16,5 +16,5 @@ Alternatively, you can go to your store's dashboard > Advanced Settings > Storef
 1. Generate an API key with the "Storefront API Tokens" permission. [More information here.](https://developer.bigcommerce.com/api-docs/getting-started/authentication/rest-api-authentication#obtaining-store-api-credentials)
 2. Get the GraphQL API authorization token. You can read more about it [here](https://developer.bigcommerce.com/api-docs/storefront/graphql/graphql-storefront-api-overview#authentication) or send the request from [here](https://developer.bigcommerce.com/api-docs/storefront/graphql/graphql-storefront-api-overview#authentication).
    * You'll have to specify a `expires_at` clause;
-   * And also the `allowed_cors_origins`. This needs to be "https://unpkg.com", since plugins are served from there.
+   * And also the `allowed_cors_origins`. This needs to be "https://plugins-cdn.datocms.com", since plugins are served from there.
 
