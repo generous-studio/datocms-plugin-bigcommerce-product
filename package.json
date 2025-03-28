@@ -1,17 +1,10 @@
 {
   "name": "@generous-studio/datocms-plugin-bigcommerce-product",
   "homepage": "https://github.com/generous-studio/datocms-plugin-bigcommerce-product",
-  "version": "0.0.4",
-  "description": "A plugin that allows users to search and select BigCommerce products.",
-  "main": "index.js",
-  "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server --port 5000",
-    "dist": "NODE_ENV=production webpack --progress",
-    "addToProject": "yo datocms-plugin:add-to-project",
-    "prepublishOnly": "rimraf lib dist && mkdir dist && npm run dist",
-    "lint": "eslint \"./src/*.{js,jsx,ts,tsx}\"",
-    "test": "echo 1"
-  },
+  "version": "0.0.5",
+  "description": "Search and select BigCommerce products",
+  "private": false,
+  "type": "module",
   "keywords": [
     "datocms-plugin",
     "field-editor",
@@ -20,92 +13,47 @@
     "product",
     "generous"
   ],
-  "files": [
-    "dist",
-    "docs"
-  ],
   "author": "generous.studio <alexandre@generous.studio>",
   "license": "MIT",
   "datoCmsPlugin": {
     "title": "BigCommerce product",
-    "previewImage": "docs/preview.png",
     "coverImage": "docs/cover.jpg",
     "entryPoint": "dist/index.html",
-    "pluginType": "field_editor",
-    "fieldTypes": [
-      "string"
-    ],
-    "parameters": {
-      "global": [
-        {
-          "id": "developmentMode",
-          "label": "Development mode",
-          "type": "boolean",
-          "required": true,
-          "default": false,
-          "hint": "Shows debug messages in console"
-        },
-        {
-          "id": "graphqlEndpoint",
-          "label": "BigCommerce store front graphql endpoint",
-          "type": "string",
-          "required": "true"
-        },
-        {
-          "id": "authorizationToken",
-          "label": "Storefront API authorization token",
-          "type": "string",
-          "required": true
-        }
-      ],
-      "instance": []
-    }
+    "permissions": [
+      "currentUserAccessToken"
+    ]
   },
-  "devDependencies": {
-    "@babel/cli": "7.15.7",
-    "@babel/core": "7.15.5",
-    "@babel/eslint-parser": "7.15.7",
-    "@babel/plugin-proposal-class-properties": "7.14.5",
-    "@babel/plugin-proposal-decorators": "7.15.4",
-    "@babel/preset-env": "7.15.6",
-    "@babel/preset-react": "7.14.5",
-    "@babel/preset-typescript": "7.15.0",
-    "@babel/register": "7.15.3",
-    "@types/react": "17.0.24",
-    "@types/react-dom": "17.0.9",
-    "@typescript-eslint/eslint-plugin": "4.31.2",
-    "@typescript-eslint/parser": "4.31.2",
-    "babel-loader": "8.2.2",
-    "css-loader": "6.3.0",
-    "eslint": "7.32.0",
-    "eslint-config-prettier": "8.3.0",
-    "eslint-import-resolver-webpack": "0.13.1",
-    "eslint-plugin-import": "2.24.2",
-    "eslint-plugin-jsx-a11y": "6.4.1",
-    "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "7.26.0",
-    "generator-datocms-plugin": "1.1.0",
-    "html-webpack-plugin": "5.3.2",
-    "mini-css-extract-plugin": "2.3.0",
-    "prettier": "2.4.1",
-    "serve": "12.0.1",
-    "style-loader": "3.3.0",
-    "svg-url-loader": "7.1.1",
-    "ts-loader": "9.2.6",
-    "typescript": "4.4.3",
-    "webpack": "5.54.0",
-    "webpack-cli": "4.8.0",
-    "webpack-dev-server": "4.3.0",
-    "yo": "4.3.0"
+  "files": [
+    "dist",
+    "docs"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "axios": "0.21.4",
-    "datocms-plugins-sdk": "0.1.2",
-    "eslint-webpack-plugin": "3.0.1",
-    "graphql": "15.6.0",
-    "graphql-request": "3.5.0",
-    "html-webpack-tags-plugin": "3.0.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "datocms-plugin-sdk": "^2.0.9",
+    "datocms-react-ui": "^2.0.9",
+    "graphql-request": "^7.1.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.54.2",
+    "use-debounce": "^10.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "globals": "^15.9.0",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

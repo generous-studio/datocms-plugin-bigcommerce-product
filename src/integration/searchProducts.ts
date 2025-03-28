@@ -1,11 +1,11 @@
 import request, { gql } from "graphql-request";
-import { Product } from "../types/Product";
+import { Product } from "../types/product";
 import { PRODUCT_FRAGMENT } from "./productFragment";
-import { Plugin } from "../types/Plugin";
+import {ValidConfig} from "../types/config.ts";
 
 export const searchProducts: (
   term: string,
-  config: Plugin["parameters"]["global"]
+  config: ValidConfig
 ) => Promise<Product[]> = (term: string = "", config) => {
   return request<{
     site: {
@@ -22,22 +22,22 @@ export const searchProducts: (
   }>(
     config.graphqlEndpoint,
     gql`
-      ${PRODUCT_FRAGMENT}
-      query productSearch($term: String) {
-        site {
-          search {
-            searchProducts(filters: { searchTerm: $term }) {
-              products {
-                edges {
-                  node {
-                    ...ProductData
-                  }
+        ${PRODUCT_FRAGMENT}
+        query productSearch($term: String) {
+            site {
+                search {
+                    searchProducts(filters: { searchTerm: $term }) {
+                        products {
+                            edges {
+                                node {
+                                    ...ProductData
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
         }
-      }
     `,
     {
       term,
@@ -46,11 +46,7 @@ export const searchProducts: (
       Authorization: `Bearer ${config.authorizationToken}`,
     }
   )
-    .then((response) =>
-      response.site.search.searchProducts.products.edges.map((e) => e.node)
-    )
-    .catch((e) => {
-      console.error(e);
-      return [] as Product[];
-    });
+  .then((response) =>
+    response.site.search.searchProducts.products.edges.map((e) => e.node)
+  )
 };

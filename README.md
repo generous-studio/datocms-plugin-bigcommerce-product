@@ -18,3 +18,5 @@ Alternatively, you can go to your store's dashboard > Advanced Settings > Storef
    * You'll have to specify a `expires_at` clause;
    * And also the `allowed_cors_origins`. This needs to be "https://plugins-cdn.datocms.com", since plugins are served from there.
 
+### Credit
+This plugin was heavily inspired by https://github.com/datocms/plugins/tree/master/shopify-product.

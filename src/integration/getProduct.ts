@@ -1,12 +1,12 @@
-import request, { gql } from "graphql-request";
-import { Product } from "../types/Product";
-import { PRODUCT_FRAGMENT } from "./productFragment";
-import { Plugin } from "../types/Plugin";
+import request, {gql} from "graphql-request";
+import {Product} from "../types/product";
+import {PRODUCT_FRAGMENT} from "./productFragment";
+import {ValidConfig} from "../types/config.ts";
 
-export const getProduct: (
-  productId: string,
-  config: Plugin["parameters"]["global"]
-) => Promise<Product | undefined> = (productId: string, config) => {
+export const getProductById: (
+  productId: string | number,
+  config: ValidConfig,
+) => Promise<Product | undefined> = (productId, config) => {
   return request<{
     site: {
       product: Product;
@@ -14,25 +14,52 @@ export const getProduct: (
   }>(
     config.graphqlEndpoint,
     gql`
-      ${PRODUCT_FRAGMENT}
-      query productData($productId: ID) {
-        site {
-          product(id: $productId) {
-            ...ProductData
-          }
+        ${PRODUCT_FRAGMENT}
+        query productData($productId: ID) {
+            site {
+                product(id: $productId) {
+                    ...ProductData
+                }
+            }
         }
-      }
     `,
     {
-      productId,
+      productId: String(productId),
     },
     {
       Authorization: `Bearer ${config.authorizationToken}`,
     }
   )
-    .then((response) => response.site.product)
-    .catch((e) => {
-      console.error(e);
-      return undefined;
-    });
+  .then((response) => response.site.product)
 };
+
+export const getProducByEntityId: (
+  productId: string | number,
+  config: ValidConfig,
+) => Promise<Product | undefined> = (productId, config) => {
+  return request<{
+    site: {
+      product: Product;
+    };
+  }>(
+    config.graphqlEndpoint,
+    gql`
+        ${PRODUCT_FRAGMENT}
+        query productData($productId: Int!) {
+            site {
+                product(entityId: $productId) {
+                    ...ProductData
+                }
+            }
+        }
+    `,
+    {
+      productId: Number(productId),
+    },
+    {
+      Authorization: `Bearer ${config.authorizationToken}`,
+    }
+  )
+  .then((response) => response.site.product)
+};
+

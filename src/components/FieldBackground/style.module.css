@@ -1,4 +1,4 @@
-.plugin-container {
+.container {
     position: relative;
     padding: 30px;
     border: 1px solid var(--border-color);
@@ -9,7 +9,7 @@
     flex-direction: column;
 }
 
-.plugin-container__with_product {
-    background: var(--light-color);
+.colored {
+    background: var(--semi-transparent-accent-color);
     transition: all 250ms ease-out;
 }

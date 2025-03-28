@@ -1,0 +1,5 @@
+.container {
+    min-height: 200px;
+    position: relative;
+    margin-top: var(--spacing-l);
+}

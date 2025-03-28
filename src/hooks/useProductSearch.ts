@@ -1,25 +1,29 @@
-import { useEffect, useState } from "react";
-import { usePlugin } from "../context/PluginContext";
-import { searchProducts } from "../integration/searchProducts";
-import { Product } from "../types/Product";
+import {useEffect, useState} from "react";
+import {searchProducts} from "../integration/searchProducts";
+import {Product} from "../types/product";
+import {ValidConfig} from "../types/config.ts";
 
-export const useProductSearch = (term: string) => {
-  const { configuration } = usePlugin();
+export const useProductSearch = (config: ValidConfig, term: string) => {
 
-  const [loading, setLoading] = useState<boolean>(true);
+  const [state, setState] = useState<"loading" | "error" | "idle">("idle")
   const [products, setProducts] = useState<Product[]>([]);
   useEffect(() => {
-    setLoading(true);
+    setState("loading");
     setProducts([]);
 
-    searchProducts(term, configuration)
+    searchProducts(term, config)
       .then((products) => {
         setProducts(products);
       })
-      .finally(() => setLoading(false));
+      .then(() => setState("idle"))
+      .catch((e) => {
+        console.error(e);
+        setState("error")
+      })
 
-    return () => {};
+    return () => {
+    };
   }, [term]);
 
-  return { loading, products };
+  return {state, products};
 };

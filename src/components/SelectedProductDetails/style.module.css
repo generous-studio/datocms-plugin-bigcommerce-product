@@ -1,0 +1,43 @@
+.productDetailsContainer {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    grid-template-rows: repeat(5, auto) 1fr;
+    grid-column-gap: 10px;
+}
+
+.productDetailsContainer .searchState {
+    grid-column: 1 / 6;
+}
+
+.productDetailsImage {
+    grid-column: 1;
+    grid-row: 1 / 5;
+    object-fit: contain;
+}
+
+.productDetailsTitle,
+.productDetailsDescription,
+.productDetailsPrice {
+    grid-column: 2;
+}
+
+.productDetailsPrice {
+    margin-top: auto;
+    grid-row: 4;
+}
+
+.actionsRow {
+    grid-row: 6;
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: end;
+    gap: 12px;
+    align-items: baseline;
+}
+
+.productDetailsTitle {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}

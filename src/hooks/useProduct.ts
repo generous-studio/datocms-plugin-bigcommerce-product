@@ -1,12 +1,23 @@
-import { useEffect, useState } from "react";
-import { Product } from "../types/Product";
-import { getProduct } from "../integration/getProduct";
-import { usePlugin } from "../context/PluginContext";
+import {useCallback, useEffect, useState} from "react";
+import {Product, ProductIdKey} from "../types/product";
+import {getProducByEntityId, getProductById} from "../integration/getProduct";
+import {ValidConfig} from "../types/config.ts";
 
-export const useProduct = (productId: string) => {
-  const [loading, setLoading] = useState<boolean>(true);
+export const useProduct = (productId: string | number, idKey: ProductIdKey, config: ValidConfig) => {
+  const [state, setState] = useState<"loading" | "error" | "idle">("idle");
   const [product, setProduct] = useState<Product>();
-  const { configuration } = usePlugin();
+
+  const fetchProduct = useCallback((productId: string | number) => {
+    setState("loading");
+
+    (idKey === "id" ? getProductById : getProducByEntityId)(productId, config)
+      .then((product) => setProduct(product))
+      .then(() => setState("idle"))
+      .catch(e => {
+        console.error(e);
+        setState("error")
+      });
+  }, [])
 
   useEffect(() => {
     setProduct(undefined);
@@ -14,12 +25,8 @@ export const useProduct = (productId: string) => {
     if (!productId) {
       return;
     }
-    setLoading(true);
-
-    getProduct(productId, configuration)
-      .then((product) => setProduct(product))
-      .finally(() => setLoading(false));
+   fetchProduct(productId)
   }, [productId]);
 
-  return { product, loading };
+  return { product, state, retry: () => fetchProduct(productId) };
 };

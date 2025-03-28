@@ -1,4 +1,4 @@
-.products-grid {
+.container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 10px;
@@ -6,7 +6,7 @@
     padding-top: 10px;
 }
 
-.products-grid__card {
+.card {
     border: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
@@ -15,10 +15,10 @@
     transition: all 250ms ease-out;
 }
 
-.products-grid__card:hover {
+.card:hover {
     background: var(--light-color);
 }
 
-.products-grid__card-title {
+.cardTitle {
     padding: 16px 8px 8px 8px;
 }

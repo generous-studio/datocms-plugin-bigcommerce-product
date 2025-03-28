@@ -1,5 +1,6 @@
 export type Product = {
   id: string;
+  entityId: number;
   name: string;
   plainTextDescription?: string;
   defaultImage: {
@@ -16,3 +17,6 @@ export type Product = {
     };
   };
 };
+
+
+export type ProductIdKey = "id" | "entityId"
