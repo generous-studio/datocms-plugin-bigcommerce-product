@@ -14,12 +14,15 @@ export const ProductsGrid: React.FC<{
           className={S.card}
           onClick={() => onProductClick(product)}
         >
-          {product.defaultImage?.urlOriginal && (
+          {product.defaultImage?.urlOriginal ? (
             <img
               className={S.cardImage}
               src={product.defaultImage.urlOriginal}
               alt={product.defaultImage.altText}
+              loading="lazy"
             />
+          ) : (
+            <div className={S.cardImagePlaceholder}>No image</div>
           )}
           <h1 className={S.cardTitle}>{product.name}</h1>
         </article>
