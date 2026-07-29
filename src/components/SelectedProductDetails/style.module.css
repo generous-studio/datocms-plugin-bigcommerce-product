@@ -14,6 +14,14 @@
     grid-column: 1;
     grid-row: 1 / 5;
     object-fit: contain;
+    object-position: top left;
+    /* images are served at their original size, so they must be clamped to the
+       grid track instead of stretching the whole field */
+    min-width: 0;
+    width: 100%;
+    max-width: 200px;
+    max-height: 200px;
+    align-self: start;
 }
 
 .productDetailsTitle,

@@ -5,14 +5,19 @@ import {Product} from "../types/product.ts";
 import {EmptyState} from "../components/EmptyState";
 import {FieldBackground} from "../components/FieldBackground";
 import {SelectedProductDetails} from "../components/SelectedProductDetails";
+import {getValueAtPath} from "../utils/getValueAtPath.ts";
 
 export const FieldExtension = ({ctx}: { ctx: RenderFieldExtensionCtx }) => {
   const fieldType = ctx.field.attributes.field_type;
 
-  const currentValue = ctx.formValues[ctx.fieldPath] as string | number | null
+  const currentValue = getValueAtPath<string | number | null>(
+    ctx.formValues,
+    ctx.fieldPath,
+  )
 
   const pluginConfig = normalizeConfig(ctx.plugin.attributes.parameters)
-  const fieldConfig = ctx.field.attributes.appearance.parameters as unknown as { idType: "id" | "entityId" }
+  const fieldConfig = (ctx.field.attributes.appearance.parameters ??
+    {}) as unknown as { idType?: "id" | "entityId" }
 
   let graphqlIdField: "id" | "entityId";
   if (fieldType === "integer")
