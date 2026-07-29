@@ -3,10 +3,10 @@ export type Product = {
   entityId: number;
   name: string;
   plainTextDescription?: string;
-  defaultImage: {
-    urlOriginal: string;
+  defaultImage?: {
+    url: string;
     altText: string;
-  };
+  } | null;
   availabilityV2: {
     status: string;
   };

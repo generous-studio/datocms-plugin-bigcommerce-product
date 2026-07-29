@@ -23,10 +23,10 @@ export const SelectedProductDetails = ({
     <div className={styles['productDetailsContainer']}>
       {product && (
         <>
-          {product.defaultImage?.urlOriginal && (
+          {product.defaultImage?.url && (
             <img
               className={styles.productDetailsImage}
-              src={product.defaultImage.urlOriginal}
+              src={product.defaultImage.url}
               alt={product.defaultImage.altText}
             />
           )}

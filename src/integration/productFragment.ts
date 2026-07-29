@@ -7,7 +7,9 @@ export const PRODUCT_FRAGMENT = gql`
         name
         plainTextDescription
         defaultImage {
-            urlOriginal
+            # sized down by BigCommerce: previews never render larger than ~250px,
+            # and 480 keeps it sharp on retina displays
+            url(width: 480)
             altText
         }
         availabilityV2 {
